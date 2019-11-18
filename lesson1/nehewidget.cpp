@@ -1,11 +1,13 @@
 ﻿#include "nehewidget.h"
 #include "ui_nehewidget.h"
+#include <QtDebug>
+#include <QTimer>
 
 NeHeWidget::NeHeWidget(QWidget *parent)
     : QGLWidget (parent)
 {
     fullscreen = fs;
-    this->setGeometry(0, 0, 640, 480);
+    this->setGeometry(20, 20, 640, 480);
     this->setWindowTitle("NeHe's OpenGl framework");
     if(fullscreen)
         showFullScreen();
@@ -14,7 +16,13 @@ NeHeWidget::NeHeWidget(QWidget *parent)
 NeHeWidget::NeHeWidget(QWidget *parent, const char *name, bool fs)
     : QGLWidget (parent), name(name)
 {
+    rTri = 0.0;
+    rQuad = 0.0;
     fullscreen = fs;
+    this->setGeometry(0, 0, 640, 480);
+    this->setWindowTitle("NeHe's OpenGl framework");
+    if(fullscreen)
+        showFullScreen();
 }
 
 NeHeWidget::~NeHeWidget()
@@ -44,16 +52,19 @@ void NeHeWidget::paintGL()
     glLoadIdentity();
 
     glTranslatef( -1.5,  0.0, -6.0 );
+    glRotatef(rTri, 0.0, 1.0, 0.0);
     glBegin( GL_TRIANGLES );
     glColor3f(1.0, 0.0, 0.0);
     glVertex3f( 0.0,  1.0, 0.0);
-    glColor3f(-1.0, -1.0, 0.0);
+    glColor3f(0.0, 1.0, 0.0);
     glVertex3f(-1.0, -1.0, 0.0);
     glColor3f(0.0, 0.0, 1.0);
     glVertex3f( 1.0, -1.0, 0.0);
     glEnd();
 
-    glTranslatef(3.0, 0.0, 0.0);
+    glLoadIdentity();
+    glTranslatef(1.5, 0.0, -6.0);
+    glRotatef(rQuad, 1.0, 0.0, 0.0);
     glColor3f(0.5, 0.5, 1.0);
     glBegin(GL_QUADS);
     glVertex3f(-1.0,  1.0, 0.0);
@@ -62,6 +73,12 @@ void NeHeWidget::paintGL()
     glVertex3f(-1.0, -1.0, 0.0);
     glEnd();
 
+    rTri  += 0.2;
+    rQuad -= 0.15;
+    QTimer::singleShot(100, this, [=](){
+        updateGL();
+    });
+    qDebug()<<"paintGL end";
 }
 
 void NeHeWidget::resizeGL(int width, int height)

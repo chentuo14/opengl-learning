@@ -32,6 +32,8 @@ private:
     bool fs = false;
 protected:
     bool fullscreen;
+    GLfloat rTri;
+    GLfloat rQuad;
 };
 
 #endif // NEHEWIDGET_H
