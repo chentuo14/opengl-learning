@@ -54,12 +54,33 @@ void NeHeWidget::paintGL()
     glTranslatef( -1.5,  0.0, -6.0 );
     glRotatef(rTri, 0.0, 1.0, 0.0);
     glBegin( GL_TRIANGLES );
-    glColor3f(1.0, 0.0, 0.0);
-    glVertex3f( 0.0,  1.0, 0.0);
-    glColor3f(0.0, 1.0, 0.0);
-    glVertex3f(-1.0, -1.0, 0.0);
-    glColor3f(0.0, 0.0, 1.0);
-    glVertex3f( 1.0, -1.0, 0.0);
+    glColor3f( 1.0, 0.0, 0.0 );
+    glVertex3f(  0.0,  1.0,  0.0 );
+    glColor3f( 0.0, 1.0, 0.0 );
+    glVertex3f( -1.0, -1.0,  1.0 );
+    glColor3f( 0.0, 0.0, 1.0 );
+    glVertex3f(  1.0, -1.0,  1.0 );
+
+    glColor3f( 1.0, 0.0, 0.0 );
+    glVertex3f(  0.0,  1.0,  0.0 );
+    glColor3f( 0.0, 0.0, 1.0 );
+    glVertex3f(  1.0, -1.0,  1.0 );
+    glColor3f( 0.0, 1.0, 0.0 );
+    glVertex3f(  1.0, -1.0, -1.0 );
+
+    glColor3f( 1.0, 0.0, 0.0 );
+    glVertex3f(  0.0,  1.0,  0.0 );
+    glColor3f( 0.0, 1.0, 0.0 );
+    glVertex3f(  1.0, -1.0, -1.0 );
+    glColor3f( 0.0, 0.0, 1.0 );
+    glVertex3f( -1.0, -1.0, -1.0 );
+
+    glColor3f( 1.0, 0.0, 0.0 );
+    glVertex3f(  0.0,  1.0,  0.0 );
+    glColor3f( 0.0, 0.0, 1.0 );
+    glVertex3f( -1.0, -1.0, -1.0 );
+    glColor3f( 0.0, 1.0, 0.0 );
+    glVertex3f( -1.0, -1.0,  1.0 );
     glEnd();
 
     glLoadIdentity();
@@ -71,10 +92,41 @@ void NeHeWidget::paintGL()
     glVertex3f( 1.0,  1.0, 0.0);
     glVertex3f( 1.0, -1.0, 0.0);
     glVertex3f(-1.0, -1.0, 0.0);
+
+    glColor3f( 1.0, 0.5, 0.0 );
+    glVertex3f(  1.0, -1.0,  1.0 );
+    glVertex3f( -1.0, -1.0,  1.0 );
+    glVertex3f( -1.0, -1.0, -1.0 );
+    glVertex3f(  1.0, -1.0, -1.0 );
+
+    glColor3f( 1.0, 0.0, 0.0 );
+    glVertex3f(  1.0,  1.0,  1.0 );
+    glVertex3f( -1.0,  1.0,  1.0 );
+    glVertex3f( -1.0, -1.0,  1.0 );
+    glVertex3f(  1.0, -1.0,  1.0 );
+
+    glColor3f( 1.0, 1.0, 0.0 );
+    glVertex3f(  1.0, -1.0, -1.0 );
+    glVertex3f( -1.0, -1.0, -1.0 );
+    glVertex3f( -1.0,  1.0, -1.0 );
+    glVertex3f(  1.0,  1.0, -1.0 );
+
+    glColor3f( 0.0, 0.0, 1.0 );
+    glVertex3f( -1.0,  1.0,  1.0 );
+    glVertex3f( -1.0,  1.0, -1.0 );
+    glVertex3f( -1.0, -1.0, -1.0 );
+    glVertex3f( -1.0, -1.0,  1.0 );
+
+    glColor3f( 1.0, 0.0, 1.0 );
+    glVertex3f(  1.0,  1.0, -1.0 );
+    glVertex3f(  1.0,  1.0,  1.0 );
+    glVertex3f(  1.0, -1.0,  1.0 );
+    glVertex3f(  1.0, -1.0, -1.0 );
     glEnd();
 
     rTri  += 0.2;
     rQuad -= 0.15;
+
     QTimer::singleShot(100, this, [=](){
         updateGL();
     });
@@ -103,16 +155,12 @@ void NeHeWidget::resizeGL(int width, int height)
 
 void NeHeWidget::keyPressEvent(QKeyEvent *e)
 {
-    switch (e->key())
-    {
+    switch (e->key()) {
     case Qt::Key_F2:
         fullscreen = !fullscreen;
-        if ( fullscreen )
-        {
+        if ( fullscreen ) {
             showFullScreen();
-        }
-        else
-        {
+        } else {
             showNormal();
             setGeometry( 0, 0, 640, 480 );
         }
