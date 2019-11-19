@@ -7,6 +7,7 @@
 #include <qgl.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include <QImage>
 
 namespace Ui {
 class NeHeWidget;
@@ -25,7 +26,7 @@ protected:
     void paintGL();
     void resizeGL( int width, int height );
     void keyPressEvent(QKeyEvent *e);
-
+    void loadGLTextures();
 private:
     Ui::NeHeWidget *ui;
     const char* name = nullptr;
@@ -34,6 +35,8 @@ protected:
     bool fullscreen;
     GLfloat rTri;
     GLfloat rQuad;
+    GLfloat xRot, yRot, zRot;
+    GLuint texture[1];
 };
 
 #endif // NEHEWIDGET_H
