@@ -108,7 +108,7 @@ void NeHeWidget::paintGL()
     QTimer::singleShot(100, this, [=](){
         updateGL();
     });
-    qDebug()<<"paintGL end";
+//    qDebug()<<"paintGL end";
 }
 
 void NeHeWidget::resizeGL(int width, int height)
